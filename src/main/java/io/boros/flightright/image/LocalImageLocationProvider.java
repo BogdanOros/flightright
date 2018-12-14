@@ -37,6 +37,10 @@ public class LocalImageLocationProvider implements ImageLocationProvider {
 
     @Override
     public Optional<File> getFile(String filename) {
+        // Naive, should be validated correctly
+        if (filename.contains("..")) {
+            return Optional.empty();
+        }
         Path path = Paths.get(this.path, filename);
         if (Files.exists(path)) {
             return Optional.of(path.toFile());
