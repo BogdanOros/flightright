@@ -16,12 +16,12 @@ import static java.lang.String.format;
 
 @LocalProfile
 @Service
-public class LocalImageURLProvider implements ImageLocationProvider {
+public class LocalImageLocationProvider implements ImageLocationProvider {
 
     private final String path = ImageLoadingController.LOCAL_IMAGE_API;
     private final int port;
 
-    public LocalImageURLProvider(@Value("${server.port}") int port) {
+    public LocalImageLocationProvider(@Value("${server.port}") int port) {
         this.port = port;
     }
 
