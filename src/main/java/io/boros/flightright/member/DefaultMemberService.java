@@ -46,11 +46,10 @@ public class DefaultMemberService implements MemberService, MemberLookupService 
     }
 
     private Member merge(Member from, Member to) {
-        to.setFirstName(from.getFirstName());
-        to.setLastName(from.getLastName());
-        to.setDateOfBirth(from.getDateOfBirth());
-        to.setZipCode(from.getZipCode());
-        return to;
+        return to.setFirstName(from.getFirstName())
+                .setLastName(from.getLastName())
+                .setDateOfBirth(from.getDateOfBirth())
+                .setZipCode(from.getZipCode());
     }
 
 }

@@ -52,11 +52,12 @@ public class MemberController {
     }
 
     @PutMapping("{id}")
-    public MemberDTO updateMember(@PathVariable("id") String id,
-                                  @Validated(Update.class) @RequestBody MemberDTO member) {
+    public ResponseEntity<MemberDTO> updateMember(@PathVariable("id") String id,
+                                                  @Validated(Update.class) @RequestBody MemberDTO member) {
         return memberService.updateMember(id, toMemberConverter.convert(member))
                 .map(toDTOConverter::convert)
-                .orElse(null);
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("{id}")
