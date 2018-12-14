@@ -27,9 +27,15 @@ public class MemberService {
 
     public Optional<Member> updateMember(String id, Member member) {
         return memberRepository.findById(id)
-                .map(existing -> {
-                    return null;
-                });
+                .map(existing -> merge(member, existing));
+    }
+
+    private Member merge(Member from, Member to) {
+        to.setFirstName(from.getFirstName());
+        to.setLastName(from.getLastName());
+        to.setDateOfBirth(from.getDateOfBirth());
+        to.setZipCode(from.getZipCode());
+        return to;
     }
 
 }
