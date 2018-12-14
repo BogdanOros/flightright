@@ -8,15 +8,8 @@ import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 import java.net.URL;
 import java.time.Instant;
-
-import static io.boros.flightright.utils.ValidationGroup.Create;
-import static io.boros.flightright.utils.ValidationGroup.Update;
 
 @Document("members")
 @Getter
@@ -27,25 +20,18 @@ import static io.boros.flightright.utils.ValidationGroup.Update;
 public class Member {
 
     @Id
-    @Null(groups = Create.class)
     private String id;
-
-    @Size(min = 1, max = 255, groups = {Create.class, Update.class})
-    @NotNull(groups = {Create.class, Update.class})
     private String firstName;
-
-    @Size(min = 1, max = 255, groups = {Create.class, Update.class})
-    @NotNull(groups = {Create.class, Update.class})
     private String lastName;
-
-    @Past(groups = {Create.class, Update.class})
-    @NotNull(groups = {Create.class, Update.class})
     private Instant dateOfBirth;
-
-    @Size(min = 1, max = 32, groups = Create.class)
-    @NotNull(groups = {Create.class, Update.class})
     private String zipCode;
-
     private URL image;
+
+    public Member(String firstName, String lastName, Instant dateOfBirth, String zipCode) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.zipCode = zipCode;
+    }
 
 }

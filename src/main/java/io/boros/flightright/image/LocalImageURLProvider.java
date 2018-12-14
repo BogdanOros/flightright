@@ -26,7 +26,7 @@ public class LocalImageURLProvider implements ImageFileProvider {
         try {
             return new URL(format("http://localhost:%d/%s/%s", port, path, filename));
         } catch (MalformedURLException e) {
-            throw new RuntimeException("File not found");
+            throw new RuntimeException("File not found: " + filename);
         }
     }
 

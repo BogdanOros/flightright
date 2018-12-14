@@ -1,6 +1,8 @@
 package io.boros.flightright.member;
 
 import io.boros.flightright.image.FileUploader;
+import io.boros.flightright.member.converter.ToMemberConverter;
+import io.boros.flightright.member.converter.ToMemberDTOConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,28 +30,36 @@ public class MemberController {
     private final MemberLookupService lookupService;
     private final FileUploader fileUploader;
 
+    private final ToMemberDTOConverter toDTOConverter;
+    private final ToMemberConverter toMemberConverter;
+
     @GetMapping
-    public Page<Member> getMembers(Pageable pageable) {
-        return lookupService.getMembers(pageable);
+    public Page<MemberDTO> getMembers(Pageable pageable) {
+        return lookupService.getMembers(pageable)
+                .map(toDTOConverter::convert);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Member> getMember(@PathVariable("id") String id) {
+    public ResponseEntity<MemberDTO> getMember(@PathVariable("id") String id) {
         return lookupService.getMember(id)
+                .map(toDTOConverter::convert)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Member> createMember(@Validated(Create.class) @RequestBody Member member) {
+    public ResponseEntity<MemberDTO> createMember(@Validated(Create.class) @RequestBody MemberDTO member) {
+        Member createdMember = memberService.createMember(toMemberConverter.convert(member));
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(memberService.createMember(member));
+                .body(toDTOConverter.convert(createdMember));
     }
 
     @PutMapping("{id}")
-    public Member updateMember(@PathVariable("id") String id,
-                               @Validated(Update.class) @RequestBody Member member) {
-        return memberService.updateMember(id, member).orElse(null);
+    public MemberDTO updateMember(@PathVariable("id") String id,
+                                  @Validated(Update.class) @RequestBody MemberDTO member) {
+        return memberService.updateMember(id, toMemberConverter.convert(member))
+                .map(toDTOConverter::convert)
+                .orElse(null);
     }
 
     @DeleteMapping("{id}")
@@ -58,11 +68,12 @@ public class MemberController {
     }
 
     @PostMapping(path = "{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Member> uploadImage(@PathVariable("id") String memberId,
-                                              @RequestBody MultipartFile image) {
+    public ResponseEntity<MemberDTO> uploadImage(@PathVariable("id") String memberId,
+                                                 @RequestBody MultipartFile image) {
         return lookupService.getMember(memberId)
                 .flatMap(member -> fileUploader.uploadFile(image)
                         .flatMap(imageURI -> memberService.updateImage(memberId, imageURI)))
+                .map(toDTOConverter::convert)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
