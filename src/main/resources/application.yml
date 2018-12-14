@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      database: members
+  security:
+    user:
+      name: admin
+      password: $2a$10$6FqxWBqGqHR2WBVKWu3WpOhR0CZ8Bx0l2eyPfyPGFSYCi4RVg8Sy6
+      roles: ADMIN
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
