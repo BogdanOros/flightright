@@ -30,7 +30,7 @@ public class MemberImageController {
                                                  @RequestBody MultipartFile image) {
         return lookupService.getMember(memberId)
                 .flatMap(member -> fileUploader.uploadFile(image)
-                        .flatMap(imageURI -> memberService.updateImage(memberId, imageURI)))
+                        .flatMap(imageName -> memberService.updateImage(memberId, imageName)))
                 .map(toDTOConverter::convert)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

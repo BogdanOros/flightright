@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.net.URL;
 import java.time.Instant;
 
 @Document("members")
@@ -25,7 +24,7 @@ public class Member {
     private String lastName;
     private Instant dateOfBirth;
     private String zipCode;
-    private URL image;
+    private String image;
 
     public Member(String firstName, String lastName, Instant dateOfBirth, String zipCode) {
         this.firstName = firstName;

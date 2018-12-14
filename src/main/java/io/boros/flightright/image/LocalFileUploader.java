@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,11 +18,9 @@ public class LocalFileUploader implements FileUploader {
 
     private static final Logger log = LoggerFactory.getLogger(LocalFileUploader.class);
 
-    private final ImageLocationProvider imageLocationProvider;
     private final FileNameGenerator fileNameGenerator;
 
-    public LocalFileUploader(ImageLocationProvider imageLocationProvider, FileNameGenerator fileNameGenerator) {
-        this.imageLocationProvider = imageLocationProvider;
+    public LocalFileUploader(FileNameGenerator fileNameGenerator) {
         this.fileNameGenerator = fileNameGenerator;
         try {
             Path dir = Paths.get("images");
@@ -36,11 +33,11 @@ public class LocalFileUploader implements FileUploader {
     }
 
     @Override
-    public Optional<URL> uploadFile(MultipartFile file) {
+    public Optional<String> uploadFile(MultipartFile file) {
         try {
             String filename = fileNameGenerator.generate(file.getOriginalFilename());
             file.transferTo(Files.createFile(Paths.get("images/" + filename)));
-            return imageLocationProvider.getURL(filename);
+            return Optional.of(filename);
         } catch (IOException ex) {
             log.warn("Failed to persist image locally: " + file.getOriginalFilename());
             return Optional.empty();

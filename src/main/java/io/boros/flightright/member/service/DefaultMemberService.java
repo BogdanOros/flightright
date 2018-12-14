@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URL;
 import java.util.Optional;
 
 @Service
@@ -29,7 +27,6 @@ public class DefaultMemberService implements MemberService, MemberLookupService 
         return memberRepository.save(member);
     }
 
-    @Transactional
     public Optional<Member> updateMember(String id, Member member) {
         return memberRepository.findById(id)
                 .map(existing -> merge(member, existing))
@@ -40,10 +37,9 @@ public class DefaultMemberService implements MemberService, MemberLookupService 
         memberRepository.deleteById(id);
     }
 
-    @Transactional
-    public Optional<Member> updateImage(String id, URL imageURL) {
+    public Optional<Member> updateImage(String id, String imageName) {
         return memberRepository.findById(id)
-                .map(member -> member.setImage(imageURL))
+                .map(member -> member.setImage(imageName))
                 .map(memberRepository::save);
     }
 

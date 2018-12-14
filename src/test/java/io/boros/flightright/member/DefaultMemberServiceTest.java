@@ -10,9 +10,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.net.URL;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.UUID;
 
 public class DefaultMemberServiceTest {
 
@@ -47,11 +47,11 @@ public class DefaultMemberServiceTest {
 
     @Test
     public void shouldChangeMembersImageURL() throws Exception {
-        URL imageURL = new URL("http://localhost/image");
-        memberService.updateImage(userId, imageURL);
+        String image = UUID.randomUUID().toString();
+        memberService.updateImage(userId, image);
 
         Mockito.verify(memberRepository).save(
-                Mockito.argThat(argument -> imageURL.equals(argument.getImage()))
+                Mockito.argThat(argument -> image.equals(argument.getImage()))
         );
     }
 }

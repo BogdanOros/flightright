@@ -2,7 +2,6 @@ package io.boros.flightright.member.service;
 
 import io.boros.flightright.member.model.Member;
 
-import java.net.URL;
 import java.util.Optional;
 
 public interface MemberService {
@@ -13,6 +12,6 @@ public interface MemberService {
 
     void deleteMember(String id);
 
-    Optional<Member> updateImage(String id, URL imageURL);
+    Optional<Member> updateImage(String id, String imageName);
 
 }
