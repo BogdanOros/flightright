@@ -14,7 +14,7 @@ import static java.lang.String.format;
 @Service
 public class LocalImageURLProvider implements ImageFileProvider {
 
-    private final String path = "images";
+    private final String path = ImageLoadingController.LOCAL_IMAGE_API;
     private final int port;
 
     public LocalImageURLProvider(@Value("${server.port}") int port) {
@@ -26,7 +26,7 @@ public class LocalImageURLProvider implements ImageFileProvider {
         try {
             return new URL(format("http://localhost:%d/%s/%s", port, path, filename));
         } catch (MalformedURLException e) {
-            throw new RuntimeException("File not found: " + filename);
+            throw new RuntimeException("Cannot create URL for file:  " + filename);
         }
     }
 

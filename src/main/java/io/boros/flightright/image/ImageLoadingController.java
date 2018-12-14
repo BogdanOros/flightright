@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static io.boros.flightright.image.ImageLoadingController.LOCAL_IMAGE_API;
+
 @LocalProfile
 @RestController
-@RequestMapping("/images")
+@RequestMapping(LOCAL_IMAGE_API)
 @RequiredArgsConstructor
 public class ImageLoadingController {
+
+    public static final String LOCAL_IMAGE_API = "images";
 
     private final ImageFileProvider urlProvider;
 

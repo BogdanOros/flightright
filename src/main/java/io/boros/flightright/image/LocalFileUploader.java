@@ -1,7 +1,8 @@
 package io.boros.flightright.image;
 
 import io.boros.flightright.utils.LocalProfile;
-import org.springframework.context.annotation.Profile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,8 @@ import java.util.UUID;
 @LocalProfile
 @Component
 public class LocalFileUploader implements FileUploader {
+
+    private static final Logger log = LoggerFactory.getLogger(LocalFileUploader.class);
 
     private final ImageFileProvider imageFileProvider;
 
@@ -39,6 +42,7 @@ public class LocalFileUploader implements FileUploader {
             Files.write(Paths.get(new File("images/" + filename).toURI()), file.getBytes());
             return Optional.of(this.imageFileProvider.getURL(filename));
         } catch (IOException ex) {
+            log.warn("Failed to persist image locally: " + file.getOriginalFilename());
             return Optional.empty();
         }
     }
