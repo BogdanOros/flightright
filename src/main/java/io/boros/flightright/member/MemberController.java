@@ -22,7 +22,7 @@ import static io.boros.flightright.utils.ValidationGroup.Update;
 })
 public class MemberController {
 
-    public static final String MEMBER_API = "/members";
+    static final String MEMBER_API = "/members";
 
     private final MemberService memberService;
     private final MemberLookupService lookupService;

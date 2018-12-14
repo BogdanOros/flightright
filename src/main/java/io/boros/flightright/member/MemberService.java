@@ -1,6 +1,5 @@
 package io.boros.flightright.member;
 
-import java.net.URI;
 import java.net.URL;
 import java.util.Optional;
 
