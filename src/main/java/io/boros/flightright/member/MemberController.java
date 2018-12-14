@@ -58,12 +58,12 @@ public class MemberController {
     }
 
     @PostMapping(path = "{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Member uploadImage(
-            @PathVariable("id") String memberId,
-            @RequestBody MultipartFile image) {
+    public ResponseEntity<Member> uploadImage(@PathVariable("id") String memberId,
+                                              @RequestBody MultipartFile image) {
         return lookupService.getMember(memberId)
                 .flatMap(member -> fileUploader.uploadFile(image)
                         .flatMap(imageURI -> memberService.updateImage(memberId, imageURI)))
-                .orElse(null);
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
