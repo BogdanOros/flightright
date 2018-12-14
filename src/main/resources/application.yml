@@ -1,4 +1,7 @@
+
 spring:
+  profiles:
+    active: local
   data:
     mongodb:
       database: members
@@ -10,3 +13,8 @@ spring:
   jackson:
     serialization:
       write-dates-as-timestamps: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+server:
+  port: 8080
