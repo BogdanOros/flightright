@@ -40,7 +40,7 @@ public class LocalFileUploader implements FileUploader {
         try {
             String filename = generateFilename(file);
             Files.write(Paths.get(new File("images/" + filename).toURI()), file.getBytes());
-            return Optional.of(this.imageLocationProvider.getURL(filename));
+            return imageLocationProvider.getURL(filename);
         } catch (IOException ex) {
             log.warn("Failed to persist image locally: " + file.getOriginalFilename());
             return Optional.empty();

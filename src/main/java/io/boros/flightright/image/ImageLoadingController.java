@@ -3,7 +3,6 @@ package io.boros.flightright.image;
 import io.boros.flightright.utils.LocalProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static io.boros.flightright.image.ImageLoadingController.LOCAL_IMAGE_API;
+import static org.springframework.http.HttpStatus.OK;
 
 @LocalProfile
 @RestController
@@ -25,10 +25,10 @@ public class ImageLoadingController {
 
     @GetMapping(path = "/{filename}")
     public ResponseEntity<FileSystemResource> fetchImage(@PathVariable("filename") String filename) {
-        FileSystemResource image = new FileSystemResource(urlProvider.getFile(filename));
-        return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.IMAGE_JPEG)
-                .body(image);
+        return urlProvider.getFile(filename)
+                .map(FileSystemResource::new)
+                .map(f -> ResponseEntity.status(OK).contentType(MediaType.IMAGE_JPEG).body(f))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }
