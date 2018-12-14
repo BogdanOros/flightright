@@ -1,6 +1,7 @@
 package io.boros.flightright.image;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import io.boros.flightright.utils.LocalProfile;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.UUID;
 
-@ConditionalOnBean(ImageLoadingController.class)
+@LocalProfile
 @Component
 public class LocalFileUploader implements FileUploader {
 

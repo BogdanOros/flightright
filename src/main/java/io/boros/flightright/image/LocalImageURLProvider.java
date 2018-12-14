@@ -1,7 +1,7 @@
 package io.boros.flightright.image;
 
+import io.boros.flightright.utils.LocalProfile;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -10,7 +10,7 @@ import java.net.URL;
 
 import static java.lang.String.format;
 
-@ConditionalOnBean(ImageLoadingController.class)
+@LocalProfile
 @Service
 public class LocalImageURLProvider implements ImageFileProvider {
 
