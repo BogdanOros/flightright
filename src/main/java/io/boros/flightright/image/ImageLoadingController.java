@@ -21,7 +21,7 @@ public class ImageLoadingController {
 
     public static final String LOCAL_IMAGE_API = "images";
 
-    private final ImageFileProvider urlProvider;
+    private final ImageLocationProvider urlProvider;
 
     @GetMapping(path = "/{filename}")
     public ResponseEntity<FileSystemResource> fetchImage(@PathVariable("filename") String filename) {

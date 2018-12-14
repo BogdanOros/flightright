@@ -12,7 +12,7 @@ import static java.lang.String.format;
 
 @LocalProfile
 @Service
-public class LocalImageURLProvider implements ImageFileProvider {
+public class LocalImageURLProvider implements ImageLocationProvider {
 
     private final String path = ImageLoadingController.LOCAL_IMAGE_API;
     private final int port;

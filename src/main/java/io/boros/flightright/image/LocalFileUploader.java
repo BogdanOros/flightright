@@ -21,10 +21,10 @@ public class LocalFileUploader implements FileUploader {
 
     private static final Logger log = LoggerFactory.getLogger(LocalFileUploader.class);
 
-    private final ImageFileProvider imageFileProvider;
+    private final ImageLocationProvider imageLocationProvider;
 
-    public LocalFileUploader(ImageFileProvider imageFileProvider) {
-        this.imageFileProvider = imageFileProvider;
+    public LocalFileUploader(ImageLocationProvider imageLocationProvider) {
+        this.imageLocationProvider = imageLocationProvider;
         try {
             Path dir = Paths.get("images");
             if (!Files.exists(dir)) {
@@ -40,7 +40,7 @@ public class LocalFileUploader implements FileUploader {
         try {
             String filename = generateFilename(file);
             Files.write(Paths.get(new File("images/" + filename).toURI()), file.getBytes());
-            return Optional.of(this.imageFileProvider.getURL(filename));
+            return Optional.of(this.imageLocationProvider.getURL(filename));
         } catch (IOException ex) {
             log.warn("Failed to persist image locally: " + file.getOriginalFilename());
             return Optional.empty();
