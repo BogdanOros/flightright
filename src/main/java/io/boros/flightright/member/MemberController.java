@@ -6,9 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static io.boros.flightright.member.MemberController.MEMBER_API;
+import static io.boros.flightright.utils.ValidationGroup.Create;
+import static io.boros.flightright.utils.ValidationGroup.Update;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,17 +36,15 @@ public class MemberController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // TODO: add validation
     @PostMapping
-    public ResponseEntity<Member> createMember(@RequestBody Member member) {
+    public ResponseEntity<Member> createMember(@Validated(Create.class) @RequestBody Member member) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(memberService.createMember(member));
     }
 
-    // TODO: add validation
     @PutMapping("{id}")
     public Member updateMember(@PathVariable("id") String id,
-                               @RequestBody Member member) {
+                               @Validated(Update.class) @RequestBody Member member) {
         return memberService.updateMember(id, member).orElse(null);
     }
 }
