@@ -1,7 +1,9 @@
-package io.boros.flightright.member;
+package io.boros.flightright.member.controller;
 
 import io.boros.flightright.image.FileUploader;
-import io.boros.flightright.member.converter.ToMemberDTOConverter;
+import io.boros.flightright.member.service.MemberLookupService;
+import io.boros.flightright.member.service.MemberService;
+import io.boros.flightright.member.controller.converter.ToMemberDTOConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.http.MediaType;
@@ -9,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import static io.boros.flightright.member.MemberController.MEMBER_API;
+import static io.boros.flightright.member.controller.MemberController.MEMBER_API;
 
 @ConditionalOnBean(FileUploader.class)
 @RestController

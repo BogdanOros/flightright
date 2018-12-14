@@ -1,7 +1,10 @@
-package io.boros.flightright.member;
+package io.boros.flightright.member.controller;
 
-import io.boros.flightright.member.converter.ToMemberConverter;
-import io.boros.flightright.member.converter.ToMemberDTOConverter;
+import io.boros.flightright.member.model.Member;
+import io.boros.flightright.member.service.MemberLookupService;
+import io.boros.flightright.member.service.MemberService;
+import io.boros.flightright.member.controller.converter.ToMemberConverter;
+import io.boros.flightright.member.controller.converter.ToMemberDTOConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import static io.boros.flightright.member.MemberController.MEMBER_API;
+import static io.boros.flightright.member.controller.MemberController.MEMBER_API;
 import static io.boros.flightright.utils.ValidationGroup.Create;
 import static io.boros.flightright.utils.ValidationGroup.Update;
 

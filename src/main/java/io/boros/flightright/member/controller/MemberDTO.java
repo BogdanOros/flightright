@@ -1,4 +1,4 @@
-package io.boros.flightright.member;
+package io.boros.flightright.member.controller;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

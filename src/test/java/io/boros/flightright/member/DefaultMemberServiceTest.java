@@ -1,5 +1,9 @@
 package io.boros.flightright.member;
 
+import io.boros.flightright.member.model.Member;
+import io.boros.flightright.member.repository.MemberRepository;
+import io.boros.flightright.member.service.DefaultMemberService;
+import io.boros.flightright.member.service.MemberService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

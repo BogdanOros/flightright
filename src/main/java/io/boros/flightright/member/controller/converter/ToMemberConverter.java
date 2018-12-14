@@ -1,7 +1,7 @@
-package io.boros.flightright.member.converter;
+package io.boros.flightright.member.controller.converter;
 
-import io.boros.flightright.member.Member;
-import io.boros.flightright.member.MemberDTO;
+import io.boros.flightright.member.model.Member;
+import io.boros.flightright.member.controller.MemberDTO;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

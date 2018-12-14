@@ -1,4 +1,6 @@
-package io.boros.flightright.member;
+package io.boros.flightright.member.service;
+
+import io.boros.flightright.member.model.Member;
 
 import java.net.URL;
 import java.util.Optional;

@@ -1,5 +1,6 @@
-package io.boros.flightright.member;
+package io.boros.flightright.member.service;
 
+import io.boros.flightright.member.model.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

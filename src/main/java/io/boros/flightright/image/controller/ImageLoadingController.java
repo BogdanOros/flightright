@@ -1,5 +1,6 @@
-package io.boros.flightright.image;
+package io.boros.flightright.image.controller;
 
+import io.boros.flightright.image.ImageLocationProvider;
 import io.boros.flightright.utils.LocalProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static io.boros.flightright.image.ImageLoadingController.LOCAL_IMAGE_API;
+import static io.boros.flightright.image.controller.ImageLoadingController.LOCAL_IMAGE_API;
 import static org.springframework.http.HttpStatus.OK;
 
 @LocalProfile

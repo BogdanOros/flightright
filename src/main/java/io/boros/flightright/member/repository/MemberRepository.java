@@ -1,5 +1,6 @@
-package io.boros.flightright.member;
+package io.boros.flightright.member.repository;
 
+import io.boros.flightright.member.model.Member;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package io.boros.flightright.member;
+package io.boros.flightright.member.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
